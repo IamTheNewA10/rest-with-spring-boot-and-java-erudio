@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.het.model.Person;
+import br.com.het.data.dto.PersonDTO;
 import br.com.het.service.PersonService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,23 +25,23 @@ public class PersonController {
   private PersonService service;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<Person> findAll() {
+  public List<PersonDTO> findAll() {
     return service.findAll();
   }
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Person findById(@PathVariable("id") Long id) {
+  public PersonDTO findById(@PathVariable("id") Long id) {
     return service.findById(id);
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public Person crete(@RequestBody Person person) {
-    return service.create(person);
+  public PersonDTO crete(@RequestBody PersonDTO PersonDTO) {
+    return service.create(PersonDTO);
   }
 
   @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public Person update(@RequestBody Person person) {
-    return service.update(person);
+  public PersonDTO update(@RequestBody PersonDTO PersonDTO) {
+    return service.update(PersonDTO);
   }
 
   @DeleteMapping(value = "/{id}")
