@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.het.service.PersonService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
+@RequestMapping("/api/test/v1")
 public class TestLogController {
 
   private Logger logger = LoggerFactory.getLogger(PersonService.class.getName());

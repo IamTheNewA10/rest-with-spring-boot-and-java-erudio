@@ -2,14 +2,25 @@ package br.com.het.data.dto;
 
 import java.io.Serializable;
 
+//import com.fasterxml.jackson.annotation.JsonIgnore;
+//import com.fasterxml.jackson.annotation.JsonProperty;
+//import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+//@JsonPropertyOrder({ "id", "first_name", "last_name", "adress", "gender", })
 public class PersonDTO implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
   private Long id;
+
+  // @JsonProperty("first_name")
   private String firstName;
+  // @JsonProperty("last_name")
   private String lastName;
+
   private String adress;
+
+  // @JsonIgnore
   private String gender;
 
   public PersonDTO() {
@@ -64,8 +75,8 @@ public class PersonDTO implements Serializable {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((id == null) ? 0 : id.hashCode());
-    result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
     result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+    result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
     result = prime * result + ((adress == null) ? 0 : adress.hashCode());
     result = prime * result + ((gender == null) ? 0 : gender.hashCode());
     return result;
@@ -85,15 +96,15 @@ public class PersonDTO implements Serializable {
         return false;
     } else if (!id.equals(other.id))
       return false;
-    if (lastName == null) {
-      if (other.lastName != null)
-        return false;
-    } else if (!lastName.equals(other.lastName))
-      return false;
     if (firstName == null) {
       if (other.firstName != null)
         return false;
     } else if (!firstName.equals(other.firstName))
+      return false;
+    if (lastName == null) {
+      if (other.lastName != null)
+        return false;
+    } else if (!lastName.equals(other.lastName))
       return false;
     if (adress == null) {
       if (other.adress != null)
