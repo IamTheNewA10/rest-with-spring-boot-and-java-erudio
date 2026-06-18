@@ -1,3 +1,6 @@
+cors:
+  originPatterns: http://localhost:8080,"http://localhost:3000"
+
 spring:
   application:
     name: rest-with-spring-boot-and-java-erudio
@@ -18,3 +21,8 @@ logging:
   level:
     root: info
     br.com.het: DEBUG
+
+spring-doc:
+  paths-to-match: /api/**/v1/**
+  swagger-ui:
+    use-root-path: true

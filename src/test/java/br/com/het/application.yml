@@ -1,11 +1,17 @@
 server:
   port: 8888
 
+cors:
+  originPatterns: http://localhost:8080,"http://localhost:3000"
+
 spring:
   application:
     name: rest-with-spring-boot-and-java-erudio
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
+  docker:
+    compose:
+      enabled: false
   jpa:
     hibernate:
       ddl-auto: none
