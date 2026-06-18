@@ -31,6 +31,9 @@ public class Person implements Serializable {
   @Column(nullable = false, length = 80)
   private String gender;
 
+  @Column(nullable = false)
+  private Boolean enabled;
+
   public Person() {
   }
 
@@ -83,10 +86,11 @@ public class Person implements Serializable {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((id == null) ? 0 : id.hashCode());
-    result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
     result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+    result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
     result = prime * result + ((adress == null) ? 0 : adress.hashCode());
     result = prime * result + ((gender == null) ? 0 : gender.hashCode());
+    result = prime * result + ((enabled == null) ? 0 : enabled.hashCode());
     return result;
   }
 
@@ -104,15 +108,15 @@ public class Person implements Serializable {
         return false;
     } else if (!id.equals(other.id))
       return false;
-    if (lastName == null) {
-      if (other.lastName != null)
-        return false;
-    } else if (!lastName.equals(other.lastName))
-      return false;
     if (firstName == null) {
       if (other.firstName != null)
         return false;
     } else if (!firstName.equals(other.firstName))
+      return false;
+    if (lastName == null) {
+      if (other.lastName != null)
+        return false;
+    } else if (!lastName.equals(other.lastName))
       return false;
     if (adress == null) {
       if (other.adress != null)
@@ -124,7 +128,20 @@ public class Person implements Serializable {
         return false;
     } else if (!gender.equals(other.gender))
       return false;
+    if (enabled == null) {
+      if (other.enabled != null)
+        return false;
+    } else if (!enabled.equals(other.enabled))
+      return false;
     return true;
+  }
+
+  public Boolean getEnabled() {
+    return enabled;
+  }
+
+  public void setEnabled(Boolean enabled) {
+    this.enabled = enabled;
   }
 
 }

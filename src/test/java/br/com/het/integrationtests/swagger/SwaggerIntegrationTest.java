@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.het.integrationtests.testcontainers.AbstractIntegrationTest;
-import br.com.het.config.TestConfig;
+import br.com.het.config.TestConfigs;
 import static io.restassured.RestAssured.given;
 
 @RunWith(SpringRunner.class)
@@ -19,7 +19,7 @@ public class SwaggerIntegrationTest extends AbstractIntegrationTest {
   public void shouldDisplaySwaggerUIPage() {
     var content = given()
         .basePath("/swagger-ui/index.html")
-        .port(TestConfig.SERVER_PORT)
+        .port(TestConfigs.SERVER_PORT)
         .when()
         .get()
         .then()

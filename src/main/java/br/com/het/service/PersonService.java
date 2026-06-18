@@ -17,6 +17,7 @@ import static br.com.het.mapper.ObjectMapper.parseListObject;
 import static br.com.het.mapper.ObjectMapper.parseObject;
 import br.com.het.model.Person;
 import br.com.het.repository.PersonRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class PersonService {
@@ -80,11 +81,24 @@ public class PersonService {
     repository.delete(entity);
   }
 
+  @Transactional
+  public PersonDTO disablePerson(Long id) {
+    logger.info("Disabling one person");
+    repository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("No records found for this Id"));
+    repository.disablePerson(id);
+
+    var entity = repository.findById(id).get();
+    var dto = parseObject(entity, PersonDTO.class);
+    return dto;
+  }
+
   private void addHateoasLinks(PersonDTO dto) {
     dto.add(linkTo(methodOn(PersonController.class).findById(dto.getId())).withSelfRel().withType("GET"));
     dto.add(linkTo(methodOn(PersonController.class).findAll()).withRel("findAll").withType("GET"));
     dto.add(linkTo(methodOn(PersonController.class).create(dto)).withRel("create").withType("POST"));
     dto.add(linkTo(methodOn(PersonController.class).update(dto)).withRel("update").withType("PUT"));
+    dto.add(linkTo(methodOn(PersonController.class).disablePerson(dto.getId())).withRel("disable").withType("PATCH"));
     dto.add(linkTo(methodOn(PersonController.class).delete(dto.getId())).withRel("delete").withType("DELETE"));
   }
 

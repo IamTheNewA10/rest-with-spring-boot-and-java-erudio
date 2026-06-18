@@ -11,6 +11,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import br.com.het.exception.ExceptionResponse;
+import br.com.het.exception.FileNotFoundException;
+import br.com.het.exception.FileStorageException;
 import br.com.het.exception.RequiredObjectIsNullException;
 import br.com.het.exception.ResourceNotFoundException;
 
@@ -45,5 +47,23 @@ public class CostumizedEntityResponseHandler extends ResponseEntityExceptionHand
         ex.getMessage(),
         request.getDescription(false));
     return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler(FileNotFoundException.class)
+  public final ResponseEntity<ExceptionResponse> handleFileNotFoundExceptions(Exception ex, WebRequest request) {
+    ExceptionResponse response = new ExceptionResponse(
+        new Date(),
+        ex.getMessage(),
+        request.getDescription(false));
+    return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+  }
+
+  @ExceptionHandler(FileStorageException.class)
+  public final ResponseEntity<ExceptionResponse> handleFileStorageException(Exception ex, WebRequest request) {
+    ExceptionResponse response = new ExceptionResponse(
+        new Date(),
+        ex.getMessage(),
+        request.getDescription(false));
+    return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
   }
 }
