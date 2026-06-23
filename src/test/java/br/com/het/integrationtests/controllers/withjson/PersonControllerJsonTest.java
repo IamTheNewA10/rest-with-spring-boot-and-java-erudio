@@ -2,6 +2,7 @@ package br.com.het.integrationtests.controllers.withjson;
 
 import br.com.het.config.TestConfigs;
 import br.com.het.integrationtests.dto.PersonDTO;
+import br.com.het.integrationtests.dto.wrapper.WrapperPersonDTO;
 import br.com.het.integrationtests.testcontainers.AbstractIntegrationTest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -197,8 +198,9 @@ class PersonControllerJsonTest extends AbstractIntegrationTest {
                                 .body()
                                 .asString();
 
-                List<PersonDTO> people = objectMapper.readValue(content, new TypeReference<List<PersonDTO>>() {
-                });
+                WrapperPersonDTO wrapper = objectMapper.readValue(content, WrapperPersonDTO.class);
+
+                List<PersonDTO> people = wrapper.getEmbedded().getPeople();
                 PersonDTO PersonOne = people.get(0);
                 person = PersonOne;
 
