@@ -27,7 +27,7 @@ public class PersonDTO extends RepresentationModel<PersonDTO> implements Seriali
   // @JsonIgnore
   private String gender;
 
-  private boolean enabled;
+  private Boolean enabled;
 
   public PersonDTO() {
   }
@@ -130,7 +130,7 @@ public class PersonDTO extends RepresentationModel<PersonDTO> implements Seriali
     return true;
   }
 
-  public boolean isEnabled() {
+  public Boolean isEnabled() {
     return enabled;
   }
 
