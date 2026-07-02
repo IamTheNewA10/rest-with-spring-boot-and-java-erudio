@@ -36,7 +36,7 @@ public class CsvExporter implements FileExporter {
             person.getLastName(),
             person.getAdress(),
             person.getGender(),
-            person.isEnabled());
+            person.getEnabled());
       }
     }
 

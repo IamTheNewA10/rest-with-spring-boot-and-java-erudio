@@ -7,9 +7,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import br.com.het.exception.BadRequestException;
-import br.com.het.file.exporter.MediaTypes;
+import br.com.het.file.MediaTypes;
 import br.com.het.file.exporter.contract.FileExporter;
 import br.com.het.file.exporter.impl.CsvExporter;
+import br.com.het.file.exporter.impl.PdfExporter;
 import br.com.het.file.exporter.impl.XlsxExporter;
 
 @Component
@@ -27,6 +28,8 @@ public class FileExporterFactory {
       return context.getBean(XlsxExporter.class);
     } else if (acceptHeader.equalsIgnoreCase(MediaTypes.APPLICATION_CSV_VALUE)) {
       return context.getBean(CsvExporter.class);
+    } else if (acceptHeader.equalsIgnoreCase(MediaTypes.APPLICATION_PDF_VALUE)) {
+      return context.getBean(PdfExporter.class);
     } else {
       throw new BadRequestException("Invalid File Format");
     }

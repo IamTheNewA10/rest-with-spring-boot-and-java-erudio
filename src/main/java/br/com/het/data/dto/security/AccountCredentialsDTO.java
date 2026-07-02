@@ -7,9 +7,16 @@ public class AccountCredentialsDTO implements Serializable {
   private static final Long serialVersionUID = 1L;
 
   private String userName;
+  private String fullName;
   private String password;
 
   public AccountCredentialsDTO() {
+  }
+
+  public AccountCredentialsDTO(String userName, String fullName, String password) {
+    this.userName = userName;
+    this.fullName = fullName;
+    this.password = password;
   }
 
   public static Long getSerialversionuid() {
@@ -32,11 +39,20 @@ public class AccountCredentialsDTO implements Serializable {
     this.password = password;
   }
 
+  public String getFullName() {
+    return fullName;
+  }
+
+  public void setFullName(String fullName) {
+    this.fullName = fullName;
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+    result = prime * result + ((fullName == null) ? 0 : fullName.hashCode());
     result = prime * result + ((password == null) ? 0 : password.hashCode());
     return result;
   }
@@ -54,6 +70,11 @@ public class AccountCredentialsDTO implements Serializable {
       if (other.userName != null)
         return false;
     } else if (!userName.equals(other.userName))
+      return false;
+    if (fullName == null) {
+      if (other.fullName != null)
+        return false;
+    } else if (!fullName.equals(other.fullName))
       return false;
     if (password == null) {
       if (other.password != null)

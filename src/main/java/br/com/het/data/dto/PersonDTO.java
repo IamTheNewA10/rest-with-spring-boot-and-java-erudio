@@ -1,9 +1,12 @@
 package br.com.het.data.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
+
+import br.com.het.model.Book;
 
 //import com.fasterxml.jackson.annotation.JsonIgnore;
 //import com.fasterxml.jackson.annotation.JsonProperty;
@@ -28,6 +31,12 @@ public class PersonDTO extends RepresentationModel<PersonDTO> implements Seriali
   private String gender;
 
   private Boolean enabled;
+
+  private String profileUrl;
+
+  private String photoUrl;
+
+  private List<Book> books;
 
   public PersonDTO() {
   }
@@ -76,6 +85,43 @@ public class PersonDTO extends RepresentationModel<PersonDTO> implements Seriali
     this.gender = gender;
   }
 
+  public String getName() {
+    return (firstName != null ? firstName : "") +
+        (lastName != null ? " " + lastName : "");
+  }
+
+  public Boolean getEnabled() {
+    return enabled;
+  }
+
+  public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
+  }
+
+  public String getProfileUrl() {
+    return profileUrl;
+  }
+
+  public void setProfileUrl(String profileUrl) {
+    this.profileUrl = profileUrl;
+  }
+
+  public String getPhotoUrl() {
+    return photoUrl;
+  }
+
+  public void setPhotoUrl(String photoUrl) {
+    this.photoUrl = photoUrl;
+  }
+
+  public List<Book> getBooks() {
+    return books;
+  }
+
+  public void setBooks(List<Book> books) {
+    this.books = books;
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -85,7 +131,10 @@ public class PersonDTO extends RepresentationModel<PersonDTO> implements Seriali
     result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
     result = prime * result + ((adress == null) ? 0 : adress.hashCode());
     result = prime * result + ((gender == null) ? 0 : gender.hashCode());
-    result = prime * result + (enabled ? 1231 : 1237);
+    result = prime * result + ((enabled == null) ? 0 : enabled.hashCode());
+    result = prime * result + ((profileUrl == null) ? 0 : profileUrl.hashCode());
+    result = prime * result + ((photoUrl == null) ? 0 : photoUrl.hashCode());
+    result = prime * result + ((books == null) ? 0 : books.hashCode());
     return result;
   }
 
@@ -125,17 +174,27 @@ public class PersonDTO extends RepresentationModel<PersonDTO> implements Seriali
         return false;
     } else if (!gender.equals(other.gender))
       return false;
-    if (enabled != other.enabled)
+    if (enabled == null) {
+      if (other.enabled != null)
+        return false;
+    } else if (!enabled.equals(other.enabled))
+      return false;
+    if (profileUrl == null) {
+      if (other.profileUrl != null)
+        return false;
+    } else if (!profileUrl.equals(other.profileUrl))
+      return false;
+    if (photoUrl == null) {
+      if (other.photoUrl != null)
+        return false;
+    } else if (!photoUrl.equals(other.photoUrl))
+      return false;
+    if (books == null) {
+      if (other.books != null)
+        return false;
+    } else if (!books.equals(other.books))
       return false;
     return true;
-  }
-
-  public Boolean isEnabled() {
-    return enabled;
-  }
-
-  public void setEnabled(boolean enabled) {
-    this.enabled = enabled;
   }
 
 }

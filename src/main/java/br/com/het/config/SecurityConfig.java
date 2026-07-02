@@ -70,7 +70,10 @@ public class SecurityConfig {
                     "/auth/refresh/**",
                     "/auth/createUser", // <- endpoint exclusivo para desenvolvimento deve ser removido em produção
                     "/swagger-ui/**",
-                    "/v3/api/docs/**")
+                    "/swagger-ui.html",
+                    "/v3/api-docs/**",
+                    "/v3/api-docs",
+                    "/v3/api-docs.yaml")
                 .permitAll()
                 .requestMatchers("/api/**").authenticated()
                 .requestMatchers("/users").denyAll())

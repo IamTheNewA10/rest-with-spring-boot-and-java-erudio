@@ -57,6 +57,20 @@ public class JwtTokenProvider {
     return new TokenDTO(userName, true, now, validity, accesToken, refreshToken);
   }
 
+  public TokenDTO refreshToken(String refreshToken) {
+    var token = "";
+    if (tokenContainBearer(refreshToken)) {
+      token = refreshToken.substring("Bearer ".length());
+    }
+
+    JWTVerifier verifier = JWT.require(algorithm).build();
+    DecodedJWT decodedJWT = verifier.verify(token);
+
+    String username = decodedJWT.getSubject();
+    List<String> roles = decodedJWT.getClaim("roles").asList(String.class);
+    return createAccessToken(username, roles);
+  }
+
   // # criacao do token de refresh
   private String getRefreshToken(String userName, List<String> roles, Date now) {
     Date refreshTokenValidity = new Date(now.getTime() + (validityInMilliseconds * 3));
@@ -102,14 +116,9 @@ public class JwtTokenProvider {
     String bearerToken = request.getHeader("Authorization");
 
     // verifica se o conteudo do header não é nulo
-    if (StringUtils.isNotBlank(bearerToken) &&
-
-    // verifica se o conteudo do header começa com o prefixo "Bearer "
-        bearerToken.startsWith("Bearer ")) {
-
-      // retira o preixo "Bearer " e retorna somente o token
+    if (tokenContainBearer(bearerToken))
       return bearerToken.substring("Bearer ".length());
-    }
+    // retira o preixo "Bearer " e retorna somente o token
     return null;
   }
 
@@ -127,5 +136,9 @@ public class JwtTokenProvider {
     } catch (Exception e) {
       throw new InvalidJwtAuthenticationException("Expired or Invalid JWT Token");
     }
+  }
+
+  private boolean tokenContainBearer(String refreshToken) {
+    return StringUtils.isNotBlank(refreshToken) && refreshToken.startsWith("Bearer ");
   }
 }

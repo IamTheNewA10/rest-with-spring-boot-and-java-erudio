@@ -29,7 +29,7 @@ import br.com.het.exception.BadRequestException;
 import br.com.het.exception.FileStorageException;
 import br.com.het.exception.RequiredObjectIsNullException;
 import br.com.het.exception.ResourceNotFoundException;
-import br.com.het.file.exporter.MediaTypes;
+import br.com.het.file.MediaTypes;
 import br.com.het.file.exporter.contract.FileExporter;
 import br.com.het.file.exporter.factory.FileExporterFactory;
 import br.com.het.file.importer.contract.FileImporter;

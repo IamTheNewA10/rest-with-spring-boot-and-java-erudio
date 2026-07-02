@@ -44,7 +44,7 @@ public class XlsxExporter implements FileExporter {
         row.createCell(3).setCellValue(person.getAdress());
         row.createCell(4).setCellValue(person.getGender());
         row.createCell(5).setCellValue(
-            person.isEnabled() != null && person.isEnabled() ? "Yes" : "No");
+            person.getEnabled() != null && person.getEnabled() ? "Yes" : "No");
       }
 
       for (int i = 0; i < headers.length; i++) {
