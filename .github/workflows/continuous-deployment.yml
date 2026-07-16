@@ -33,8 +33,7 @@ jobs:
         run: docker compose build
 
       - name: Push To Docker Hub Container Registry
-        run:
-          # Tag the image that docker-compose built (image name defined in docker-compose.yml)
+        run: |
           docker tag ${{ secrets.DOCKER_USERNAME }}/rest-with-spring-boot-erudio:latest ${{ secrets.DOCKER_USERNAME }}/rest-with-spring-boot-erudio:latest
           docker tag ${{ secrets.DOCKER_USERNAME }}/rest-with-spring-boot-erudio:latest ${{ secrets.DOCKER_USERNAME }}/rest-with-spring-boot-erudio:${{ github.run_id }}
 
